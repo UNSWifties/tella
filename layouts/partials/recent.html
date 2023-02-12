@@ -1,4 +1,5 @@
-{{ range first 3 (where site.RegularPages.ByDate.Reverse "Type" "in" site.Params.mainSections )}}
+{{ $posts := (where site.RegularPages.ByDate.Reverse "Type" "in" site.Params.mainSections ) }}
+{{ range first 3 $posts }}
 <a href="{{ .Permalink }}">{{ partial "summary.html" . }}</a>
 {{ end }}
 

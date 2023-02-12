@@ -26,11 +26,14 @@
             <div class="text-lg lg:flex-grow">
             </div>
             <div class="text-lg">
+                {{ $posts := (where site.RegularPages.ByDate.Reverse "Type" "in" site.Params.mainSections ) }}
                 {{ range .Site.Menus.main }}
-                <a href="{{ .URL | safeURL }}"
-                    class="duration-200 block mt-4 lg:inline-block lg:mt-0 text-white hover:opacity-60 mr-8">
-                    {{ .Name }}
-                </a>
+                    {{ if or (gt (len $posts) 0) (ne .Name "Blog") }}
+                    <a href="{{ .URL | safeURL }}"
+                        class="duration-200 block mt-4 lg:inline-block lg:mt-0 text-white hover:opacity-60 mr-8">
+                        {{ .Name }}
+                    </a>
+                    {{ end }}
                 {{ end }}
             </div>
         </div>
